@@ -64,8 +64,5 @@ class CEntitySA
 			MEMBER_VARIABLE(0x58C,	CEntitySA *		m_vehicle)
 			MEMBER_VARIABLE(0x960,	uint8_t			m_contact_wheels)
 		MEMBER_END()
-	
-	public:
-		uint32_t GetVehicleSubtype();
 };
 #pragma pack(pop)

@@ -24,37 +24,3 @@
  */
 
 #include "../main.h"
-
-uint32_t CEntitySA::GetVehicleSubtype()
-{
-	if(*(uint32_t *)this == 0x00871120)
-	{
-		return VEHICLE_SUBTYPE_CAR;
-	}
-	else if(*(uint32_t *)this == 0x008721A0)
-	{
-		return VEHICLE_SUBTYPE_BOAT;
-	}
-	else if(*(uint32_t *)this == 0x00871360)
-	{
-		return VEHICLE_SUBTYPE_BIKE;
-	}
-	else if(*(uint32_t *)this == 0x00871948)
-	{
-		return VEHICLE_SUBTYPE_PLANE;
-	}
-	else if(*(uint32_t *)this == 0x00871680)
-	{
-		return VEHICLE_SUBTYPE_HELI;
-	}
-	else if(*(uint32_t *)this == 0x00871528)
-	{
-		return VEHICLE_SUBTYPE_PUSHBIKE;
-	}
-	else if(*(uint32_t *)this == 0x00872370)
-	{
-		return VEHICLE_SUBTYPE_TRAIN;
-	}
-	
-	return 0;
-}
