@@ -141,7 +141,7 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 											
 											time_t time_elapsed = rawtime - jacked.GetPtr()->GetRawtime();
 											
-											if(time_elapsed <= 2)
+											if(time_elapsed <= 5)
 											{
 												old_position = jacked.GetPtr()->GetOldPosition();
 												old_up_z = jacked.GetPtr()->GetOldUpZ();
@@ -166,7 +166,9 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 										}
 									}
 									
-									if(teleport_dist > 25.0)
+									float vehicle_health_diff = vehicle_health - old_health;
+									
+									if(teleport_dist > 15.0f)
 										show_alert = true;
 									
 									if(teleport_up_z <= 0.0f && old_up_z > 0.0f)
@@ -175,7 +177,10 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 									if(vehicle_health <= 250.0f && old_health > 250.0f)
 										show_alert = true;
 									
-									CRefPtr<CJacked> jacked = new CJacked(playerid, playername, driverid, drivername, teleport_dist, teleport_up_z, vehicle_health, (float)vehicle_health - old_health, old_position, old_up_z, old_health, counter, rawtime, show_alert);
+									if(fabs(vehicle_health_diff) > 15.0f)
+										show_alert = true;
+									
+									CRefPtr<CJacked> jacked = new CJacked(playerid, playername, driverid, drivername, teleport_dist, teleport_up_z, vehicle_health, vehicle_health_diff, old_position, old_up_z, old_health, counter, rawtime, show_alert);
 									
 									jacked_list.push_back(jacked);
 									
