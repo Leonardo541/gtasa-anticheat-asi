@@ -32,16 +32,31 @@ class CPlayerPool
 {
 	public:
 		MEMBER_BEGIN()
-			MEMBER_VARIABLE(0x4,	uint16_t		m_localplayerid)
-			MEMBER_VARIABLE(0x6,	CStringBase		m_localplayername)
-			MEMBER_VARIABLE(0x26,	CLocalPlayer *	m_localplayer)
-			MEMBER_VARIABLE(0x2A,	int				m_created[1004])
-			MEMBER_VARIABLE(0x1F8A,	CPlayerInfo *	m_players[1004])
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x4,	uint16_t		m_localplayerid)
+				MEMBER_VARIABLE(0x6,	CStringBase		m_localplayername)
+				MEMBER_VARIABLE(0x22,	CLocalPlayer *	m_localplayer)
+				MEMBER_VARIABLE(0x2E,	CPlayerInfo *	m_players[1004])
+				MEMBER_VARIABLE(0xFDE,	int				m_created[1004])
+			MEMBER_END(v037);
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x4,	uint16_t		m_localplayerid)
+				MEMBER_VARIABLE(0x6,	CStringBase		m_localplayername)
+				MEMBER_VARIABLE(0x26,	CLocalPlayer *	m_localplayer)
+				MEMBER_VARIABLE(0x2A,	int				m_created[1004])
+				MEMBER_VARIABLE(0x1F8A,	CPlayerInfo *	m_players[1004])
+			MEMBER_END(v037_r5);
 		MEMBER_END()
 	
-	CRemotePlayer *GetRemotePlayer(uint16_t playerid);
-	CPlayerPed *GetPlayerPed(uint16_t playerid);
-	const char *GetPlayerName(uint16_t playerid);
-	uint16_t GetPlayerIdFromEntity(CEntitySA *entity);
+	public:
+		uint16_t GetLocalPlayerId();
+		const char *GetLocalPlayerName();
+		CLocalPlayer *GetLocalPlayer();
+		CPlayerInfo *GetPlayerInfo(uint16_t playerid);
+		CRemotePlayer *GetRemotePlayer(uint16_t playerid);
+		CPlayerPed *GetPlayerPed(uint16_t playerid);
+		const char *GetPlayerName(uint16_t playerid);
+		uint16_t GetPlayerIdFromEntity(CEntitySA *entity);
 };
 #pragma pack(pop)

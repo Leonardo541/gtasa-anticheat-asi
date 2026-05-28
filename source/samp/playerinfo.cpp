@@ -24,3 +24,45 @@
  */
 
 #include "../main.h"
+
+CRemotePlayer *CPlayerInfo::GetRemotePlayer()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_remoteplayer;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_remoteplayer;
+	}
+	
+	return NULL;
+}
+
+const char *CPlayerInfo::GetPlayerName()
+{
+	CStringBase *str = NULL;
+	
+	if(samp_version == SAMP_VERSION_037)
+	{
+		str = &v037.m_playername;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		str = &v037_r5.m_playername;
+	}
+	
+	if(str != NULL)
+	{
+		if(str->m_allocated_capacity < 16)
+		{
+			return str->m_buf.local_buf;
+		}
+		else
+		{
+			return str->m_buf.alloc_buf;
+		}
+	}
+	
+	return NULL;
+}

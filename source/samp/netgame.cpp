@@ -31,7 +31,14 @@ static Packet_VehicleSync_t pfnPacket_VehicleSync = NULL;
 
 void CNetGame::ApplyHooks()
 {
-	MEMBER_CALL(samp_address + 0x0000B2B6, CNetGame, Packet_VehicleSync);
+	if(samp_version == SAMP_VERSION_037)
+	{
+		MEMBER_CALL(samp_address + 0x0000ADCA, CNetGame, Packet_VehicleSync);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		MEMBER_CALL(samp_address + 0x0000B2B6, CNetGame, Packet_VehicleSync);
+	}
 }
 
 void CNetGame::Packet_VehicleSync(Packet *packet)
@@ -73,10 +80,12 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 		
 		if(playerid < 1004 && vehicleid < 2000)
 		{
-			if(m_pools != NULL)
+			CPools *pools = GetPools();
+			
+			if(pools != NULL)
 			{
-				CPlayerPool *playerpool = m_pools->m_playerpool;
-				CVehiclePool *vehiclepool = m_pools->m_vehiclepool;
+				CPlayerPool *playerpool = pools->GetPlayerPool();
+				CVehiclePool *vehiclepool = pools->GetVehiclePool();
 				
 				if(playerpool != NULL && vehiclepool != NULL)
 				{
@@ -91,7 +100,7 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 							{
 								uint16_t driverid = playerpool->GetPlayerIdFromEntity(vehicle->m_entity->m_driver);
 								
-								if(config.GetPtr()->GetJackedShowAll() || driverid == playerpool->m_localplayerid)
+								if(config.GetPtr()->GetJackedShowAll() || driverid == playerpool->GetLocalPlayerId())
 								{
 									time_t rawtime;
 									time(&rawtime);
@@ -187,7 +196,7 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 									if(jacked_list.size() > (uint32_t)max_rows)
 										jacked_list.erase(jacked_list.begin());
 									
-									if(show_alert && driverid == playerpool->m_localplayerid)
+									if(show_alert && driverid == playerpool->GetLocalPlayerId())
 										return;
 								}
 							}
@@ -199,4 +208,18 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 	}
 	
 	METHOD_CALL(this, pfnPacket_VehicleSync, packet);
+}
+
+CPools *CNetGame::GetPools()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_pools;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_pools;
+	}
+	
+	return NULL;
 }

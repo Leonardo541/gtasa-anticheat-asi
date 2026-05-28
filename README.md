@@ -1,5 +1,5 @@
 # GTASA-ANTICHEAT-ASI
-Anti-Cheat for SA:MP v0.3.7-R5 (client mod)
+Anti-Cheat for SA:MP v0.3.7 & v0.3.7-R5 (client mod)
 
 ----
 

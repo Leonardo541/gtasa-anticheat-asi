@@ -37,11 +37,22 @@ static CreateFonts_t pfnCreateFonts = NULL;
 
 void CFontRender::ApplyHooks()
 {
-	POINTER_TO_MEMBER(pfnCalcTextSize, samp_address + 0x0006B2B0);
-	POINTER_TO_MEMBER(pfnRenderText, samp_address + 0x0006B4E0);
-	
-	MEMBER_CALL(samp_address + 0x000C3F6C, CFontRender, DestroyDeviceObjects);
-	MEMBER_CALL(samp_address + 0x000686C3, CFontRender, CreateFonts);
+	if(samp_version == SAMP_VERSION_037)
+	{
+		POINTER_TO_MEMBER(pfnCalcTextSize, samp_address + 0x00066BD0);
+		POINTER_TO_MEMBER(pfnRenderText, samp_address + 0x00066E00);
+		
+		MEMBER_CALL(samp_address + 0x000B299C, CFontRender, DestroyDeviceObjects);
+		MEMBER_CALL(samp_address + 0x00064AF3, CFontRender, CreateFonts);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		POINTER_TO_MEMBER(pfnCalcTextSize, samp_address + 0x0006B2B0);
+		POINTER_TO_MEMBER(pfnRenderText, samp_address + 0x0006B4E0);
+		
+		MEMBER_CALL(samp_address + 0x000C3F6C, CFontRender, DestroyDeviceObjects);
+		MEMBER_CALL(samp_address + 0x000686C3, CFontRender, CreateFonts);
+	}
 }
 
 POINT *CFontRender::CalcTextSize(POINT *size, const char *text, int format)

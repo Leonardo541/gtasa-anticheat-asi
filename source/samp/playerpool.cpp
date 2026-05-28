@@ -25,14 +25,90 @@
 
 #include "../main.h"
 
+uint16_t CPlayerPool::GetLocalPlayerId()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_localplayerid;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_localplayerid;
+	}
+	
+	return 0xFFFF;
+}
+
+const char *CPlayerPool::GetLocalPlayerName()
+{
+	CStringBase *str = NULL;
+	
+	if(samp_version == SAMP_VERSION_037)
+	{
+		str = &v037.m_localplayername;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		str = &v037_r5.m_localplayername;
+	}
+	
+	if(str != NULL)
+	{
+		if(str->m_allocated_capacity < 16)
+		{
+			return str->m_buf.local_buf;
+		}
+		else
+		{
+			return str->m_buf.alloc_buf;
+		}
+	}
+	
+	return NULL;
+}
+
+CLocalPlayer *CPlayerPool::GetLocalPlayer()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_localplayer;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_localplayer;
+	}
+	
+	return NULL;
+}
+
+CPlayerInfo *CPlayerPool::GetPlayerInfo(uint16_t playerid)
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		if(v037.m_created[playerid])
+		{
+			return v037.m_players[playerid];
+		}
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		if(v037_r5.m_created[playerid])
+		{
+			return v037_r5.m_players[playerid];
+		}
+	}
+	
+	
+	return NULL;
+}
+
 CRemotePlayer *CPlayerPool::GetRemotePlayer(uint16_t playerid)
 {
-	if(m_created[playerid])
+	CPlayerInfo *playerinfo = GetPlayerInfo(playerid);
+	
+	if(playerinfo != NULL)
 	{
-		CPlayerInfo *playerinfo = m_players[playerid];
-		
-		if(playerinfo != NULL)
-			return playerinfo->m_remoteplayer;
+		return playerinfo->GetRemotePlayer();
 	}
 	
 	return NULL;
@@ -40,17 +116,19 @@ CRemotePlayer *CPlayerPool::GetRemotePlayer(uint16_t playerid)
 
 CPlayerPed *CPlayerPool::GetPlayerPed(uint16_t playerid)
 {
-	if(playerid == m_localplayerid)
+	if(playerid == GetLocalPlayerId())
 	{
-		if(m_localplayer != NULL)
-			return m_localplayer->m_playerped;
+		CLocalPlayer *localplayer = GetLocalPlayer();
+		
+		if(localplayer != NULL)
+			return localplayer->GetPlayerPed();
 	}
 	else
 	{
 		CRemotePlayer *remoteplayer = GetRemotePlayer(playerid);
 		
 		if(remoteplayer != NULL)
-			return remoteplayer->m_playerped;
+			return remoteplayer->GetPlayerPed();
 	}
 	
 	return NULL;
@@ -58,31 +136,17 @@ CPlayerPed *CPlayerPool::GetPlayerPed(uint16_t playerid)
 
 const char *CPlayerPool::GetPlayerName(uint16_t playerid)
 {
-	if(playerid == m_localplayerid)
+	if(playerid == GetLocalPlayerId())
 	{
-		if(m_localplayername.m_allocated_capacity < 16)
-		{
-			return m_localplayername.m_buf.local_buf;
-		}
-		else
-		{
-			return m_localplayername.m_buf.alloc_buf;
-		}
+		return GetLocalPlayerName();
 	}
-	else if(m_created[playerid])
+	else
 	{
-		CPlayerInfo *playerinfo = m_players[playerid];
+		CPlayerInfo *playerinfo = GetPlayerInfo(playerid);
 		
 		if(playerinfo != NULL)
 		{
-			if(playerinfo->m_playername.m_allocated_capacity < 16)
-			{
-				return playerinfo->m_playername.m_buf.local_buf;
-			}
-			else
-			{
-				return playerinfo->m_playername.m_buf.alloc_buf;
-			}
+			return playerinfo->GetPlayerName();
 		}
 	}
 	

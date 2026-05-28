@@ -24,3 +24,17 @@
  */
 
 #include "../main.h"
+
+CPlayerPed *CLocalPlayer::GetPlayerPed()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_playerped;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_playerped;
+	}
+	
+	return NULL;
+}

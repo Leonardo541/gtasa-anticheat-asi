@@ -173,6 +173,14 @@
 			Name="core"
 			>
 			<File
+				RelativePath=".\source\core\crc32.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\source\core\crc32.h"
+				>
+			</File>
+			<File
 				RelativePath=".\source\core\refs.cpp"
 				>
 			</File>

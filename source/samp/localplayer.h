@@ -32,7 +32,16 @@ class CLocalPlayer
 {
 	public:
 		MEMBER_BEGIN()
-			MEMBER_VARIABLE(0x104,	CPlayerPed *	m_playerped)
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE_OFFZERO(CPlayerPed *	m_playerped)
+			MEMBER_END(v037);
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x104,	CPlayerPed *	m_playerped)
+			MEMBER_END(v037_r5);
 		MEMBER_END()
+	
+	public:
+		CPlayerPed *GetPlayerPed();
 };
 #pragma pack(pop)

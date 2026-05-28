@@ -32,8 +32,19 @@ class CRemotePlayer
 {
 	public:
 		MEMBER_BEGIN()
-			MEMBER_VARIABLE(0x1DD,	CPlayerPed *	m_playerped)
-			MEMBER_VARIABLE(0x1E5,	uint16_t		m_playerid)
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE_OFFZERO(CPlayerPed *	m_playerped)
+				MEMBER_VARIABLE(0xAB,	uint16_t		m_playerid)
+			MEMBER_END(v037);
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x1DD,	CPlayerPed *	m_playerped)
+				MEMBER_VARIABLE(0x1E5,	uint16_t		m_playerid)
+			MEMBER_END(v037_r5);
 		MEMBER_END()
+	
+	public:
+		CPlayerPed *GetPlayerPed();
+		uint16_t GetPlayerId();
 };
 #pragma pack(pop)

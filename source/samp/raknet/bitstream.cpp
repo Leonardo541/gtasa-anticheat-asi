@@ -41,12 +41,24 @@ static ReadVector_t pfnReadVector = NULL;
 
 void BitStream::ApplyHooks()
 {
-	POINTER_TO_MEMBER(pfnConstructor, samp_address + 0x0001F840);
-	POINTER_TO_MEMBER(pfnDestructor, samp_address + 0x0001F8D0);
-	POINTER_TO_MEMBER(pfnReadBits, samp_address + 0x0001F9B0);
-	POINTER_TO_MEMBER(pfnRead, samp_address + 0x0001FEA0);
-	POINTER_TO_MEMBER(pfnReadNormQuat, samp_address + 0x00009680);
-	POINTER_TO_MEMBER(pfnReadVector, samp_address + 0x0000A3B0);
+	if(samp_version == SAMP_VERSION_037)
+	{
+		POINTER_TO_MEMBER(pfnConstructor, samp_address + 0x0001BD50);
+		POINTER_TO_MEMBER(pfnDestructor, samp_address + 0x0001BDE0);
+		POINTER_TO_MEMBER(pfnReadBits, samp_address + 0x0001BEC0);
+		POINTER_TO_MEMBER(pfnRead, samp_address + 0x0001C3B0);
+		POINTER_TO_MEMBER(pfnReadNormQuat, samp_address + 0x00009180);
+		POINTER_TO_MEMBER(pfnReadVector, samp_address + 0x00009ED0);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		POINTER_TO_MEMBER(pfnConstructor, samp_address + 0x0001F840);
+		POINTER_TO_MEMBER(pfnDestructor, samp_address + 0x0001F8D0);
+		POINTER_TO_MEMBER(pfnReadBits, samp_address + 0x0001F9B0);
+		POINTER_TO_MEMBER(pfnRead, samp_address + 0x0001FEA0);
+		POINTER_TO_MEMBER(pfnReadNormQuat, samp_address + 0x00009680);
+		POINTER_TO_MEMBER(pfnReadVector, samp_address + 0x0000A3B0);
+	}
 }
 
 BitStream::BitStream(void *data, uint32_t bytes, bool copy_data)

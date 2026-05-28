@@ -32,12 +32,20 @@ class CNetGame
 {
 	public:
 		MEMBER_BEGIN()
-			MEMBER_VARIABLE(0x3DE,	CPools *		m_pools)
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x3CD,	CPools *		m_pools)
+			MEMBER_END(v037);
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x3DE,	CPools *		m_pools)
+			MEMBER_END(v037_r5);
 		MEMBER_END()
 	
 	public:
 		static void ApplyHooks();
 		
 		void Packet_VehicleSync(Packet *packet);
+		
+		CPools *GetPools();
 };
 #pragma pack(pop)

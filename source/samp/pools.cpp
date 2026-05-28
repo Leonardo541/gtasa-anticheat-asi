@@ -24,3 +24,31 @@
  */
 
 #include "../main.h"
+
+CPlayerPool *CPools::GetPlayerPool()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_playerpool;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_playerpool;
+	}
+	
+	return NULL;
+}
+
+CVehiclePool *CPools::GetVehiclePool()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return v037.m_vehiclepool;
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return v037_r5.m_vehiclepool;
+	}
+	
+	return NULL;
+}

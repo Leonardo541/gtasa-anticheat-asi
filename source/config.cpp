@@ -32,7 +32,7 @@ CConfig::CConfig() : CRefCount()
 	m_jacked_position.x = 48;
 	m_jacked_position.y = -320;
 	
-	CConfigFile *configfile = *(CConfigFile **)(samp_address + 0x0026EB7C);
+	CConfigFile *configfile = GetConfigFile();
 	
 	if(configfile != NULL)
 	{

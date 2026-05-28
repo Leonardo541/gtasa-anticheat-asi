@@ -25,6 +25,9 @@
 
 #pragma once
 
+#define SAMP_VERSION_037				1
+#define SAMP_VERSION_037_R5				2
+
 #define WIDTH							(*(int *)0x00C17044)
 #define HEIGHT							(*(int *)0x00C17048)
 
@@ -36,7 +39,7 @@
 #define MEMBER_BEGIN()					union {
 #define MEMBER_VARIABLE_OFFZERO(v)		struct { v; };
 #define MEMBER_VARIABLE(o, v)			struct { uint8_t m_padding##o[o]; v; };
-#define MEMBER_END()					};
+#define MEMBER_END(...)					} __VA_ARGS__;
 
 #if __cplusplus >= 201103L
 	#define NO_COPY_OBJECT(t)					\
@@ -63,6 +66,7 @@
 #include <d3dx9core.h>
 
 // core
+#include "core/crc32.h"
 #include "core/refs.h"
 #include "core/textures.h"
 #include "core/vector.h"
@@ -93,6 +97,7 @@
 #include "jacked.h"
 
 extern uint32_t samp_address;
+extern uint32_t samp_version;
 
 extern CRefPtr<CConfig> config;
 
@@ -107,3 +112,6 @@ extern POINT text_size_2chrs;
 extern bool calc_text_size;
 
 void Call(uint32_t address, uint32_t function, uint32_t *old);
+
+CConfigFile *GetConfigFile();
+CFontRender *GetFontRender();

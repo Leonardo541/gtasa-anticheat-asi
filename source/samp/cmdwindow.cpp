@@ -37,11 +37,22 @@ static MsgProc_t pfnMsgProc = NULL;
 
 void CCmdWindow::ApplyHooks()
 {
-	POINTER_TO_MEMBER(pfnEnable, samp_address + 0x00069480);
-	POINTER_TO_MEMBER(pfnDisable, samp_address + 0x00069580);
-	
-	MEMBER_CALL(samp_address + 0x00075A90, CCmdWindow, OnRender);
-	MEMBER_CALL(samp_address + 0x000616C2, CCmdWindow, MsgProc);
+	if(samp_version == SAMP_VERSION_037)
+	{
+		POINTER_TO_MEMBER(pfnEnable, samp_address + 0x000657E0);
+		POINTER_TO_MEMBER(pfnDisable, samp_address + 0x000658E0);
+		
+		MEMBER_CALL(samp_address + 0x00071491, CCmdWindow, OnRender);
+		MEMBER_CALL(samp_address + 0x0005DBB2, CCmdWindow, MsgProc);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		POINTER_TO_MEMBER(pfnEnable, samp_address + 0x00069480);
+		POINTER_TO_MEMBER(pfnDisable, samp_address + 0x00069580);
+		
+		MEMBER_CALL(samp_address + 0x00075A90, CCmdWindow, OnRender);
+		MEMBER_CALL(samp_address + 0x000616C2, CCmdWindow, MsgProc);
+	}
 }
 
 void CCmdWindow::Enable()
@@ -56,7 +67,7 @@ void CCmdWindow::Disable()
 
 void CCmdWindow::OnRender()
 {
-	CFontRender *fontrender = *(CFontRender **)(samp_address + 0x0026EB9C);
+	CFontRender *fontrender = GetFontRender();
 	
 	if(fontrender)
 	{
@@ -122,7 +133,15 @@ int CCmdWindow::MsgProc(UINT msg, WPARAM wparam, LPARAM lparam)
 					Disable();
 					Enable();
 					
-					*(uint32_t *)(samp_address + 0x0012DE6C) = 0; // cancel CCmdWindow::Disable()
+					if(samp_version == SAMP_VERSION_037)
+					{
+						*(uint32_t *)(samp_address + 0x00119CC4) = 0; // cancel CCmdWindow::Disable()
+					}
+					else if(samp_version == SAMP_VERSION_037_R5)
+					{
+						*(uint32_t *)(samp_address + 0x0012DE6C) = 0; // cancel CCmdWindow::Disable()
+					}
+					
 					return 0;
 				}
 				

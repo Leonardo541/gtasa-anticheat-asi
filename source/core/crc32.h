@@ -23,32 +23,8 @@
  *
  */
 
+#pragma once
+
 #include "../main.h"
 
-CPlayerPed *CRemotePlayer::GetPlayerPed()
-{
-	if(samp_version == SAMP_VERSION_037)
-	{
-		return v037.m_playerped;
-	}
-	else if(samp_version == SAMP_VERSION_037_R5)
-	{
-		return v037_r5.m_playerped;
-	}
-	
-	return NULL;
-}
-
-uint16_t CRemotePlayer::GetPlayerId()
-{
-	if(samp_version == SAMP_VERSION_037)
-	{
-		return v037.m_playerid;
-	}
-	else if(samp_version == SAMP_VERSION_037_R5)
-	{
-		return v037_r5.m_playerid;
-	}
-	
-	return 0xFFFF;
-}
+uint32_t crc32_file(FILE *file);

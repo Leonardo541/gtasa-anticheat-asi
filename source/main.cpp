@@ -26,6 +26,7 @@
 #include "main.h"
 
 uint32_t samp_address = 0;
+uint32_t samp_version = 0;
 
 CRefPtr<CConfig> config;
 
@@ -74,6 +75,54 @@ void Initialize()
 	config = new CConfig();
 }
 
+uint32_t CheckVersion()
+{
+	FILE *file = fopen("samp.dll", "rb");
+	
+	if(file != NULL)
+	{
+		uint32_t crc = crc32_file(file);
+		
+		fclose(file);
+		
+		if(crc == 0x831D3AE6)
+			return SAMP_VERSION_037;
+		
+		if(crc == 0xCA3DAB05)
+			return SAMP_VERSION_037_R5;
+	}
+	
+	return 0;
+}
+
+CConfigFile *GetConfigFile()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return *(CConfigFile **)(samp_address + 0x0021A0E0);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return *(CConfigFile **)(samp_address + 0x0026EB7C);
+	}
+	
+	return NULL;
+}
+
+CFontRender *GetFontRender()
+{
+	if(samp_version == SAMP_VERSION_037)
+	{
+		return *(CFontRender **)(samp_address + 0x0021A0FC);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		return *(CFontRender **)(samp_address + 0x0026EB9C);
+	}
+	
+	return NULL;
+}
+
 int EndLoop(void *camera)
 {
 	int ret = pfnEndLoop(camera);
@@ -84,15 +133,27 @@ int EndLoop(void *camera)
 		
 		if(!initialized)
 		{
-			samp_address = (uint32_t)GetModuleHandle("samp.dll");
+			if(samp_address == 0)
+				samp_address = (uint32_t)GetModuleHandle("samp.dll");
 			
 			if(samp_address != 0)
 			{
-				CConfigFile *configfile = *(CConfigFile **)(samp_address + 0x0026EB7C);
+				if(samp_version == 0)
+					samp_version = CheckVersion();
 				
-				if(configfile != NULL)
+				if(samp_version != 0)
 				{
-					Initialize();
+					CConfigFile *configfile = GetConfigFile();
+					
+					if(configfile != NULL)
+					{
+						Initialize();
+						initialized = true;
+					}
+				}
+				else
+				{
+					// unsupported version
 					initialized = true;
 				}
 			}

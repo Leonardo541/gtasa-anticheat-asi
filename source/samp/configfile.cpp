@@ -43,13 +43,26 @@ static SetFloat_t pfnSetFloat = NULL;
 
 void CConfigFile::ApplyHooks()
 {
-	POINTER_TO_MEMBER(pfnExists, samp_address + 0x00065D30);
-	POINTER_TO_MEMBER(pfnGetInt, samp_address + 0x00065E10);
-	POINTER_TO_MEMBER(pfnGetString, samp_address + 0x00065E40);
-	POINTER_TO_MEMBER(pfnGetFloat, samp_address + 0x00065E70);
-	POINTER_TO_MEMBER(pfnSetInt, samp_address + 0x00066080);
-	POINTER_TO_MEMBER(pfnSetString, samp_address + 0x000660E0);
-	POINTER_TO_MEMBER(pfnSetFloat, samp_address + 0x00066180);
+	if(samp_version == SAMP_VERSION_037)
+	{
+		POINTER_TO_MEMBER(pfnExists, samp_address + 0x00062170);
+		POINTER_TO_MEMBER(pfnGetInt, samp_address + 0x00062250);
+		POINTER_TO_MEMBER(pfnGetString, samp_address + 0x00062280);
+		POINTER_TO_MEMBER(pfnGetFloat, samp_address + 0x000622B0);
+		POINTER_TO_MEMBER(pfnSetInt, samp_address + 0x000624C0);
+		POINTER_TO_MEMBER(pfnSetString, samp_address + 0x00062520);
+		POINTER_TO_MEMBER(pfnSetFloat, samp_address + 0x000625C0);
+	}
+	else if(samp_version == SAMP_VERSION_037_R5)
+	{
+		POINTER_TO_MEMBER(pfnExists, samp_address + 0x00065D30);
+		POINTER_TO_MEMBER(pfnGetInt, samp_address + 0x00065E10);
+		POINTER_TO_MEMBER(pfnGetString, samp_address + 0x00065E40);
+		POINTER_TO_MEMBER(pfnGetFloat, samp_address + 0x00065E70);
+		POINTER_TO_MEMBER(pfnSetInt, samp_address + 0x00066080);
+		POINTER_TO_MEMBER(pfnSetString, samp_address + 0x000660E0);
+		POINTER_TO_MEMBER(pfnSetFloat, samp_address + 0x00066180);
+	}
 }
 
 bool CConfigFile::Exists(const char *key)

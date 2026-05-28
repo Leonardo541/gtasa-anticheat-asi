@@ -32,8 +32,19 @@ class CPools
 {
 	public:
 		MEMBER_BEGIN()
-			MEMBER_VARIABLE_OFFZERO(CVehiclePool *	m_vehiclepool)
-			MEMBER_VARIABLE(0x4,	CPlayerPool *	m_playerpool)
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x18,	CPlayerPool *	m_playerpool)
+				MEMBER_VARIABLE(0x1C,	CVehiclePool *	m_vehiclepool)
+			MEMBER_END(v037);
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE_OFFZERO(CVehiclePool *	m_vehiclepool)
+				MEMBER_VARIABLE(0x4,	CPlayerPool *	m_playerpool)
+			MEMBER_END(v037_r5);
 		MEMBER_END()
+	
+	public:
+		CPlayerPool *GetPlayerPool();
+		CVehiclePool *GetVehiclePool();
 };
 #pragma pack(pop)
