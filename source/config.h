@@ -37,6 +37,8 @@ class CConfig : public CRefCount
 		bool			m_jacked_show_all;
 		int				m_jacked_max_rows;
 		POINT			m_jacked_position;
+		int				m_jacked_max_time;
+		bool			m_jacked_examples;
 	
 	public:
 		CConfig();
@@ -46,4 +48,6 @@ class CConfig : public CRefCount
 		inline bool GetJackedShowAll() { return m_jacked_show_all; }
 		inline int GetJackedMaxRows() { return m_jacked_max_rows; }
 		inline POINT GetJackedPosition() { return m_jacked_position; }
+		inline int GetJackedMaxTime() { return m_jacked_max_time; }
+		inline bool GetJackedExamples() { return m_jacked_examples; }
 };

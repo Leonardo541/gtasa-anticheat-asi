@@ -156,6 +156,7 @@ int CCmdWindow::MsgProc(UINT msg, WPARAM wparam, LPARAM lparam)
 void CCmdWindow::DrawJacked(CFontRender *fontrender)
 {
 	POINT position = config.GetPtr()->GetJackedPositionInScreen();
+	time_t max_time = (time_t)config.GetPtr()->GetJackedMaxTime();
 	
 	time_t rawtime;
 	time(&rawtime);
@@ -168,7 +169,7 @@ void CCmdWindow::DrawJacked(CFontRender *fontrender)
 		
 		time_t time_elapsed = rawtime - jacked.GetPtr()->GetRawtime();
 		
-		if(time_elapsed > 99)
+		if(time_elapsed > max_time)
 		{
 			clear_jacked_list = true;
 			continue;
@@ -189,7 +190,7 @@ void CCmdWindow::DrawJacked(CFontRender *fontrender)
 			
 			time_t time_elapsed = rawtime - jacked.GetPtr()->GetRawtime();
 			
-			if(time_elapsed > 99)
+			if(time_elapsed > max_time)
 			{
 				it = jacked_list.erase(it);
 				continue;

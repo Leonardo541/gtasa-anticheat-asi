@@ -34,7 +34,7 @@
 #define JACKED_HEALTH_WIDTH			(text_size_4chrs.x)
 #define JACKED_HEALTH_DIFF_WIDTH	(text_size_4chrs.x)
 #define JACKED_COUNTER_WIDTH		(text_size_4chrs.x)
-#define JACKED_TIME_ELAPSED_WIDTH	(text_size_2chrs.x)
+#define JACKED_TIME_ELAPSED_WIDTH	(config.GetPtr()->GetJackedMaxTime() <= 99 ? text_size_2chrs.x : text_size_4chrs.x)
 #define JACKED_TEXTURE_WIDTH		(text_size_2chrs.y)
 
 #define JACKED_WIDTH				(JACKED_PLAYERNAME_WIDTH                               + 4 + JACKED_TELEPORT_DIST_WIDTH + 4 + JACKED_TELEPORT_UP_Z_WIDTH + 4 + JACKED_HEALTH_WIDTH + 4 + JACKED_HEALTH_DIFF_WIDTH + 4 + JACKED_COUNTER_WIDTH + JACKED_TIME_ELAPSED_WIDTH)

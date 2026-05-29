@@ -31,6 +31,8 @@ CConfig::CConfig() : CRefCount()
 	m_jacked_max_rows = 10;
 	m_jacked_position.x = 48;
 	m_jacked_position.y = -320;
+	m_jacked_max_time = 99;
+	m_jacked_examples = false;
 	
 	CConfigFile *configfile = GetConfigFile();
 	
@@ -39,6 +41,8 @@ CConfig::CConfig() : CRefCount()
 		configfile->GetOrCreateBoolean("jacked_show_all", &m_jacked_show_all);
 		configfile->GetOrCreateInt("jacked_max_rows", &m_jacked_max_rows);
 		configfile->GetOrCreatePoint("jacked_position", &m_jacked_position);
+		configfile->GetOrCreateInt("jacked_max_time", &m_jacked_max_time);
+		configfile->GetOrCreateBoolean("jacked_examples", &m_jacked_examples);
 	}
 }
 

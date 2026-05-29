@@ -73,6 +73,18 @@ void Initialize()
 	CNetGame::ApplyHooks();
 	
 	config = new CConfig();
+	
+	if(config.GetPtr()->GetJackedExamples())
+	{
+		CRefPtr<CJacked> jacked1 = new CJacked(0, "Teleport_Example", 1, "Driver_Name", 500.0f, 1.0f, 1250.0f, 0.0f, vector_t(), 0.0f, 0.0f, 1, time(NULL), true);
+		jacked_list.push_back(jacked1);
+		
+		CRefPtr<CJacked> jacked2 = new CJacked(0, "Flipping_Example", 1, "Driver_Name", 0.0f, -1.0f, 1250.0f, 0.0f, vector_t(), 0.0f, 0.0f, 1, time(NULL), true);
+		jacked_list.push_back(jacked2);
+		
+		CRefPtr<CJacked> jacked3 = new CJacked(0, "Explosion_Example", 1, "Driver_Name", 0.0f, 1.0f, 100.0f, -1150.0f, vector_t(), 0.0f, 0.0f, 1, time(NULL), true);
+		jacked_list.push_back(jacked3);
+	}
 }
 
 uint32_t CheckVersion()
