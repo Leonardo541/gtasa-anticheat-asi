@@ -177,7 +177,7 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 									
 									float vehicle_health_diff = vehicle_health - old_health;
 									
-									if(teleport_dist > 15.0f)
+									if(teleport_dist > 20.0f)
 										show_alert = true;
 									
 									if(teleport_up_z <= 0.0f && old_up_z > 0.0f)
@@ -186,7 +186,7 @@ void CNetGame::Packet_VehicleSync(Packet *packet)
 									if(vehicle_health <= 250.0f && old_health > 250.0f)
 										show_alert = true;
 									
-									if(fabs(vehicle_health_diff) > 15.0f)
+									if(vehicle_health_diff < -200.0f)
 										show_alert = true;
 									
 									CRefPtr<CJacked> jacked = new CJacked(playerid, playername, driverid, drivername, teleport_dist, teleport_up_z, vehicle_health, vehicle_health_diff, old_position, old_up_z, old_health, counter, rawtime, show_alert);
