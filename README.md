@@ -51,7 +51,7 @@ You can compile with Visual Studio 2008 or Mingw-w64
 **Requirements:**
 
 - Visual Studio 2008
-- DirectX 9.0 SDK (Summer 2004)
+- DirectX 9.0 SDK (April 2005)
 - [stdint.h](https://github.com/glfw/glfw/blob/cc9168bda1992326e7609d427c4982695455a90a/deps/vs2008/stdint.h)
 
 **How to build:**
