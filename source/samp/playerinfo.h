@@ -52,12 +52,12 @@ class CPlayerInfo
 			MEMBER_BEGIN()
 				MEMBER_VARIABLE_OFFZERO(CRemotePlayer *	m_remoteplayer)
 				MEMBER_VARIABLE(0x8,	CStringBase		m_playername)
-			MEMBER_END(v037);
+			MEMBER_END(v037)
 			
 			MEMBER_BEGIN()
 				MEMBER_VARIABLE(0x10,	CRemotePlayer *	m_remoteplayer)
 				MEMBER_VARIABLE(0x14,	CStringBase		m_playername)
-			MEMBER_END(v037_r5);
+			MEMBER_END(v037_r5)
 		MEMBER_END()
 	public:
 		CRemotePlayer *GetRemotePlayer();
