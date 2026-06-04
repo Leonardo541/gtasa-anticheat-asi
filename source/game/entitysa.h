@@ -27,14 +27,6 @@
 
 #include "../main.h"
 
-#define	VEHICLE_SUBTYPE_CAR				1
-#define	VEHICLE_SUBTYPE_BIKE			2
-#define	VEHICLE_SUBTYPE_HELI			3
-#define	VEHICLE_SUBTYPE_BOAT			4
-#define	VEHICLE_SUBTYPE_PLANE			5
-#define	VEHICLE_SUBTYPE_PUSHBIKE		6
-#define	VEHICLE_SUBTYPE_TRAIN			7
-
 #pragma pack(push, 1)
 class CEntitySA
 {
