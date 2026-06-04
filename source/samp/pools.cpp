@@ -35,6 +35,10 @@ CPlayerPool *CPools::GetPlayerPool()
 	{
 		return v037_r5.m_playerpool;
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_playerpool;
+	}
 	
 	return NULL;
 }
@@ -48,6 +52,10 @@ CVehiclePool *CPools::GetVehiclePool()
 	else if(samp_version == SAMP_VERSION_037_R5)
 	{
 		return v037_r5.m_vehiclepool;
+	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_vehiclepool;
 	}
 	
 	return NULL;

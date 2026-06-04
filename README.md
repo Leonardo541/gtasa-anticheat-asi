@@ -1,6 +1,6 @@
 # GTASA-ANTICHEAT-ASI
 
-Anti-Cheat for SA:MP v0.3.7 & v0.3.7-R5 (client mod)
+Anti-Cheat for SA:MP v0.3.7, v0.3.7-R5 & v0.3.DL-R1 (client mod)
 
 ----
 
@@ -41,6 +41,7 @@ The position on screen is based on left / top for positive values ​​and righ
 
 - SA:MP Client v0.3.7
 - SA:MP Client v0.3.7-R5
+- SA:MP Client v0.3.DL-R1
 
 ## How to build
 

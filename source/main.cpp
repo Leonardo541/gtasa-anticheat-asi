@@ -102,6 +102,9 @@ uint32_t CheckVersion()
 		
 		if(crc == 0xCA3DAB05)
 			return SAMP_VERSION_037_R5;
+		
+		if(crc == 0x155B1F75)
+			return SAMP_VERSION_03DL_R1;
 	}
 	
 	return 0;
@@ -117,6 +120,10 @@ CConfigFile *GetConfigFile()
 	{
 		return *(CConfigFile **)(samp_address + 0x0026EB7C);
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return *(CConfigFile **)(samp_address + 0x002ACA0C);
+	}
 	
 	return NULL;
 }
@@ -130,6 +137,10 @@ CFontRender *GetFontRender()
 	else if(samp_version == SAMP_VERSION_037_R5)
 	{
 		return *(CFontRender **)(samp_address + 0x0026EB9C);
+	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return *(CFontRender **)(samp_address + 0x002ACA2C);
 	}
 	
 	return NULL;

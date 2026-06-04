@@ -58,7 +58,13 @@ class CPlayerInfo
 				MEMBER_VARIABLE(0x10,	CRemotePlayer *	m_remoteplayer)
 				MEMBER_VARIABLE(0x14,	CStringBase		m_playername)
 			MEMBER_END(v037_r5)
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x8,	CRemotePlayer *	m_remoteplayer)
+				MEMBER_VARIABLE(0x10,	CStringBase		m_playername)
+			MEMBER_END(v03dl_r1)
 		MEMBER_END()
+	
 	public:
 		CRemotePlayer *GetRemotePlayer();
 		const char *GetPlayerName();

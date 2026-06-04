@@ -35,6 +35,10 @@ CPlayerPed *CRemotePlayer::GetPlayerPed()
 	{
 		return v037_r5.m_playerped;
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_playerped;
+	}
 	
 	return NULL;
 }
@@ -48,6 +52,10 @@ uint16_t CRemotePlayer::GetPlayerId()
 	else if(samp_version == SAMP_VERSION_037_R5)
 	{
 		return v037_r5.m_playerid;
+	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_playerid;
 	}
 	
 	return 0xFFFF;

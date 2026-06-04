@@ -47,6 +47,14 @@ class CPlayerPool
 				MEMBER_VARIABLE(0x2A,	int				m_created[1004])
 				MEMBER_VARIABLE(0x1F8A,	CPlayerInfo *	m_players[1004])
 			MEMBER_END(v037_r5)
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE_OFFZERO(uint16_t		m_localplayerid)
+				MEMBER_VARIABLE(0x2,	CStringBase		m_localplayername)
+				MEMBER_VARIABLE(0x1E,	CLocalPlayer *	m_localplayer)
+				MEMBER_VARIABLE(0x26,	CPlayerInfo *	m_players[1004])
+				MEMBER_VARIABLE(0xFD6,	int				m_created[1004])
+			MEMBER_END(v03dl_r1)
 		MEMBER_END()
 	
 	public:

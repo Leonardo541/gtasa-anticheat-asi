@@ -35,6 +35,10 @@ uint16_t CPlayerPool::GetLocalPlayerId()
 	{
 		return v037_r5.m_localplayerid;
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_localplayerid;
+	}
 	
 	return 0xFFFF;
 }
@@ -50,6 +54,10 @@ const char *CPlayerPool::GetLocalPlayerName()
 	else if(samp_version == SAMP_VERSION_037_R5)
 	{
 		str = &v037_r5.m_localplayername;
+	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		str = &v03dl_r1.m_localplayername;
 	}
 	
 	if(str != NULL)
@@ -77,6 +85,10 @@ CLocalPlayer *CPlayerPool::GetLocalPlayer()
 	{
 		return v037_r5.m_localplayer;
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_localplayer;
+	}
 	
 	return NULL;
 }
@@ -97,7 +109,13 @@ CPlayerInfo *CPlayerPool::GetPlayerInfo(uint16_t playerid)
 			return v037_r5.m_players[playerid];
 		}
 	}
-	
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		if(v03dl_r1.m_created[playerid])
+		{
+			return v03dl_r1.m_players[playerid];
+		}
+	}
 	
 	return NULL;
 }

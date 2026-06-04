@@ -35,6 +35,10 @@ CPlayerPed *CLocalPlayer::GetPlayerPed()
 	{
 		return v037_r5.m_playerped;
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_playerped;
+	}
 	
 	return NULL;
 }

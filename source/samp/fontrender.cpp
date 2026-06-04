@@ -53,6 +53,14 @@ void CFontRender::ApplyHooks()
 		MEMBER_CALL(samp_address + 0x000C3F6C, CFontRender, DestroyDeviceObjects);
 		MEMBER_CALL(samp_address + 0x000686C3, CFontRender, CreateFonts);
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		POINTER_TO_MEMBER(pfnCalcTextSize, samp_address + 0x0006ACF0);
+		POINTER_TO_MEMBER(pfnRenderText, samp_address + 0x0006AF20);
+		
+		MEMBER_CALL(samp_address + 0x000C563C, CFontRender, DestroyDeviceObjects);
+		MEMBER_CALL(samp_address + 0x00068133, CFontRender, CreateFonts);
+	}
 }
 
 POINT *CFontRender::CalcTextSize(POINT *size, const char *text, int format)

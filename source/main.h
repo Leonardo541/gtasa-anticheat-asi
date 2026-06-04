@@ -27,6 +27,7 @@
 
 #define SAMP_VERSION_037				1
 #define SAMP_VERSION_037_R5				2
+#define SAMP_VERSION_03DL_R1			3
 
 #define WIDTH							(*(int *)0x00C17044)
 #define HEIGHT							(*(int *)0x00C17048)

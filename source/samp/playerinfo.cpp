@@ -35,6 +35,10 @@ CRemotePlayer *CPlayerInfo::GetRemotePlayer()
 	{
 		return v037_r5.m_remoteplayer;
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_remoteplayer;
+	}
 	
 	return NULL;
 }
@@ -50,6 +54,10 @@ const char *CPlayerInfo::GetPlayerName()
 	else if(samp_version == SAMP_VERSION_037_R5)
 	{
 		str = &v037_r5.m_playername;
+	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		str = &v03dl_r1.m_playername;
 	}
 	
 	if(str != NULL)

@@ -53,6 +53,14 @@ void CCmdWindow::ApplyHooks()
 		MEMBER_CALL(samp_address + 0x00075A90, CCmdWindow, OnRender);
 		MEMBER_CALL(samp_address + 0x000616C2, CCmdWindow, MsgProc);
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		POINTER_TO_MEMBER(pfnEnable, samp_address + 0x00068EC0);
+		POINTER_TO_MEMBER(pfnDisable, samp_address + 0x00068FC0);
+		
+		MEMBER_CALL(samp_address + 0x00075511, CCmdWindow, OnRender);
+		MEMBER_CALL(samp_address + 0x00061142, CCmdWindow, MsgProc);
+	}
 }
 
 void CCmdWindow::Enable()
@@ -140,6 +148,10 @@ int CCmdWindow::MsgProc(UINT msg, WPARAM wparam, LPARAM lparam)
 					else if(samp_version == SAMP_VERSION_037_R5)
 					{
 						*(uint32_t *)(samp_address + 0x0012DE6C) = 0; // cancel CCmdWindow::Disable()
+					}
+					else if(samp_version == SAMP_VERSION_03DL_R1)
+					{
+						*(uint32_t *)(samp_address + 0x0016BE84) = 0; // cancel CCmdWindow::Disable()
 					}
 					
 					return 0;

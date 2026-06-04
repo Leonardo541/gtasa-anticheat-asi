@@ -39,6 +39,10 @@ class CNetGame
 			MEMBER_BEGIN()
 				MEMBER_VARIABLE(0x3DE,	CPools *		m_pools)
 			MEMBER_END(v037_r5)
+			
+			MEMBER_BEGIN()
+				MEMBER_VARIABLE(0x3DE,	CPools *		m_pools)
+			MEMBER_END(v03dl_r1)
 		MEMBER_END()
 	
 	public:

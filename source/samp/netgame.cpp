@@ -39,6 +39,10 @@ void CNetGame::ApplyHooks()
 	{
 		MEMBER_CALL(samp_address + 0x0000B2B6, CNetGame, Packet_VehicleSync);
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		MEMBER_CALL(samp_address + 0x0000AF97, CNetGame, Packet_VehicleSync);
+	}
 }
 
 void CNetGame::Packet_VehicleSync(Packet *packet)
@@ -219,6 +223,10 @@ CPools *CNetGame::GetPools()
 	else if(samp_version == SAMP_VERSION_037_R5)
 	{
 		return v037_r5.m_pools;
+	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		return v03dl_r1.m_pools;
 	}
 	
 	return NULL;

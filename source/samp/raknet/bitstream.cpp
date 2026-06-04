@@ -59,6 +59,15 @@ void BitStream::ApplyHooks()
 		POINTER_TO_MEMBER(pfnReadNormQuat, samp_address + 0x00009680);
 		POINTER_TO_MEMBER(pfnReadVector, samp_address + 0x0000A3B0);
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		POINTER_TO_MEMBER(pfnConstructor, samp_address + 0x0001F300);
+		POINTER_TO_MEMBER(pfnDestructor, samp_address + 0x0001F390);
+		POINTER_TO_MEMBER(pfnReadBits, samp_address + 0x0001F470);
+		POINTER_TO_MEMBER(pfnRead, samp_address + 0x0001F960);
+		POINTER_TO_MEMBER(pfnReadNormQuat, samp_address + 0x00009370);
+		POINTER_TO_MEMBER(pfnReadVector, samp_address + 0x0000A0A0);
+	}
 }
 
 BitStream::BitStream(void *data, uint32_t bytes, bool copy_data)

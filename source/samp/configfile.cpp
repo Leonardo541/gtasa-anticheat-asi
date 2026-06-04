@@ -63,6 +63,16 @@ void CConfigFile::ApplyHooks()
 		POINTER_TO_MEMBER(pfnSetString, samp_address + 0x000660E0);
 		POINTER_TO_MEMBER(pfnSetFloat, samp_address + 0x00066180);
 	}
+	else if(samp_version == SAMP_VERSION_03DL_R1)
+	{
+		POINTER_TO_MEMBER(pfnExists, samp_address + 0x000657B0);
+		POINTER_TO_MEMBER(pfnGetInt, samp_address + 0x00065890);
+		POINTER_TO_MEMBER(pfnGetString, samp_address + 0x000658C0);
+		POINTER_TO_MEMBER(pfnGetFloat, samp_address + 0x000658F0);
+		POINTER_TO_MEMBER(pfnSetInt, samp_address + 0x00065B00);
+		POINTER_TO_MEMBER(pfnSetString, samp_address + 0x00065B60);
+		POINTER_TO_MEMBER(pfnSetFloat, samp_address + 0x00065C00);
+	}
 }
 
 bool CConfigFile::Exists(const char *key)
